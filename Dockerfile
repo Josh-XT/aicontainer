@@ -58,3 +58,7 @@ RUN --mount=type=cache,target=/root/.cache/pip,sharing=locked \
 COPY static-requirements.txt /app/static-requirements.txt
 RUN --mount=type=cache,target=/root/.cache/pip,sharing=locked \
     pip install -r static-requirements.txt
+
+# Install Playwright and dependencies
+RUN playwright install-deps && \
+    playwright install
