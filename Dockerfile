@@ -24,7 +24,8 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     git build-essential gcc g++ sqlite3 libsqlite3-dev wget libgomp1 ffmpeg \
     python3 python3-pip python3-dev curl postgresql-client libnss3 libnspr4 \
     libatk1.0-0 libatk-bridge2.0-0 libcups2 libatspi2.0-0 libxcomposite1 nodejs \
-    libportaudio2 libasound-dev libreoffice unoconv poppler-utils chromium chromium-sandbox && \
+    libportaudio2 libasound-dev libreoffice unoconv poppler-utils chromium chromium-sandbox \
+    unixodbc unixodbc-dev cmake && \
     apt-get install -y gcc-10 g++-10 && \
     update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 10 && \
     update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 10 && \
@@ -47,7 +48,10 @@ RUN wget https://www.sqlite.org/2023/sqlite-autoconf-3420000.tar.gz && \
 
 # Install Python runtime and essential tools
 RUN --mount=type=cache,target=/root/.cache/pip,sharing=locked \
-    pip install -U pip setuptools
+    pip install -U pip setuptools && \
+    pip install spacy==3.7.5 && \
+    python -m spacy download en_core_web_sm && \
+    pip install textacy==0.13.0
 
 # Set work directory
 WORKDIR /app
