@@ -26,7 +26,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     libatk1.0-0 libatk-bridge2.0-0 libcups2 libatspi2.0-0 libxcomposite1 nodejs \
     libportaudio2 libasound-dev libreoffice unoconv poppler-utils chromium chromium-sandbox \
     unixodbc unixodbc-dev cmake openscad xvfb xauth \
-    pandoc texlive-latex-base && \
+    pandoc texlive-latex-extra lmodern && \
     apt-get install -y gcc-10 g++-10 && \
     update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 10 && \
     update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 10 && \
