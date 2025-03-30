@@ -1,4 +1,4 @@
-agixtsdk==0.0.73
+agixtsdk==0.0.77
 safeexecute==0.0.9
 google-generativeai==0.8.3
 discord==2.3.2
