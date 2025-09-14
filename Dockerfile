@@ -49,11 +49,12 @@ RUN wget https://www.sqlite.org/2023/sqlite-autoconf-3420000.tar.gz && \
     cd .. && \
     rm -rf sqlite*
 
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
+ENV PATH="/root/.local/bin:$PATH"
+
 # Install Python runtime and essential tools
 RUN --mount=type=cache,target=/root/.cache/pip,sharing=locked \
-    pip install -U pip setuptools && \
-    pip install --upgrade numpy==1.26.4 scipy spacy thinc spacy-legacy spacy-loggers && \
-    python -m spacy download en_core_web_sm
+    pip install -U pip setuptools
 
 # Set work directory
 WORKDIR /app
@@ -63,7 +64,8 @@ RUN --mount=type=cache,target=/root/.cache/pip,sharing=locked \
 
 COPY static-requirements.txt /app/static-requirements.txt
 RUN --mount=type=cache,target=/root/.cache/pip,sharing=locked \
-    pip install -r static-requirements.txt
+    pip install -r static-requirements.txt && \
+    python -m spacy download en_core_web_sm
 
 # Install Playwright and dependencies
 RUN playwright install-deps && \
