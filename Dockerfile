@@ -1,5 +1,5 @@
-# Use Python 3.10
-ARG BASE_IMAGE="python:3.10-bullseye"
+# Use Python 3.11
+ARG BASE_IMAGE="python:3.11-bullseye"
 FROM ${BASE_IMAGE}
 
 # Set environment variables
@@ -52,9 +52,8 @@ RUN wget https://www.sqlite.org/2023/sqlite-autoconf-3420000.tar.gz && \
 # Install Python runtime and essential tools
 RUN --mount=type=cache,target=/root/.cache/pip,sharing=locked \
     pip install -U pip setuptools && \
-    pip install spacy==3.7.5 && \
-    python -m spacy download en_core_web_sm && \
-    pip install textacy==0.13.0
+    pip install --upgrade numpy==1.26.4 scipy spacy thinc spacy-legacy spacy-loggers && \
+    python -m spacy download en_core_web_sm
 
 # Set work directory
 WORKDIR /app
