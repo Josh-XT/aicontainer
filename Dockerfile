@@ -28,7 +28,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     unixodbc unixodbc-dev cmake openscad xvfb xauth \
     libdbus-1-3 libxkbcommon0 libxdamage1 \
     libxfixes3 libxrandr2 libgbm1 libasound2 \
-    pandoc texlive-latex-extra lmodern bubblewrap && \
+    pandoc texlive-latex-extra lmodern bubblewrap apt-transport-https && \
     apt-get install -y gcc-10 g++-10 && \
     update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 10 && \
     update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 10 && \
