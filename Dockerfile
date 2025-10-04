@@ -34,9 +34,8 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     awk '/^deb / && !seen[$0]++ {gsub(/^deb /, "deb-src "); print}' /etc/apt/sources.list | tee -a /etc/apt/sources.list && \
     apt-get update && \
     apt-get build-dep sqlite3 -y && \
+    curl -LsSf https://astral.sh/uv/install.sh | sh && \
     rm -rf /var/lib/apt/lists/*
-
-RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 ENV PATH="/root/.local/bin:$PATH"
 
 # Install Python runtime and essential tools
