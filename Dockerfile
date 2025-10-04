@@ -60,13 +60,14 @@ RUN --mount=type=cache,target=/root/.cache/pip,sharing=locked \
 WORKDIR /app
 COPY requirements.txt /app/requirements.txt
 RUN --mount=type=cache,target=/root/.cache/pip,sharing=locked \
-    pip install -r requirements.txt
+    pip install --no-cache-dir -r requirements.txt
 
 COPY static-requirements.txt /app/static-requirements.txt
 RUN --mount=type=cache,target=/root/.cache/pip,sharing=locked \
-    pip install -r static-requirements.txt && \
+    pip install --no-cache-dir -r static-requirements.txt && \
     python -m spacy download en_core_web_sm
 
 # Install Playwright and dependencies
-RUN playwright install-deps && \
-    playwright install
+RUN playwright install-deps chromium && \
+    playwright install chromium && \
+    rm -rf /root/.cache/pip /root/.cache/ms-playwright /var/cache/apt/archives /var/tmp/* /tmp/*
