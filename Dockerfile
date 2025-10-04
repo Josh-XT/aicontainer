@@ -48,12 +48,10 @@ WORKDIR /app
 
 COPY static-requirements.txt /app/static-requirements.txt
 RUN --mount=type=cache,target=/root/.cache/pip,sharing=locked \
-    pip install --no-cache-dir -r static-requirements.txt
+    pip install --no-cache-dir -r static-requirements.txt && \
+    playwright install chromium
 
 COPY requirements.txt /app/requirements.txt
 RUN --mount=type=cache,target=/root/.cache/pip,sharing=locked \
     pip install --no-cache-dir -r requirements.txt && \
     python -m spacy download en_core_web_sm
-
-# Install Playwright and dependencies
-RUN playwright install chromium
