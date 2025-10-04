@@ -9,7 +9,7 @@ ENV PYTHONUNBUFFERED=1 \
     HNSWLIB_NO_NATIVE=1 \
     PATH="/usr/local/bin:$PATH" \
     LD_PRELOAD=libgomp.so.1 \
-    LD_LIBRARY_PATH="/usr/local/lib64/:$LD_LIBRARY_PATH" \
+    LD_LIBRARY_PATH="/usr/local/lib64/:/usr/local/lib" \
     DEBIAN_FRONTEND=noninteractive \
     CHROME_BIN=/usr/bin/chromium \
     CHROMIUM_PATH=/usr/bin/chromium \
@@ -40,17 +40,18 @@ ENV PATH="/root/.local/bin:$PATH"
 
 # Install Python runtime and essential tools
 RUN --mount=type=cache,target=/root/.cache/pip,sharing=locked \
-    pip install -U pip setuptools
+    pip install --no-cache-dir --upgrade pip setuptools
 
 # Set work directory
 WORKDIR /app
-COPY requirements.txt /app/requirements.txt
-RUN --mount=type=cache,target=/root/.cache/pip,sharing=locked \
-    pip install --no-cache-dir -r requirements.txt
 
 COPY static-requirements.txt /app/static-requirements.txt
 RUN --mount=type=cache,target=/root/.cache/pip,sharing=locked \
-    pip install --no-cache-dir -r static-requirements.txt && \
+    pip install --no-cache-dir -r static-requirements.txt
+
+COPY requirements.txt /app/requirements.txt
+RUN --mount=type=cache,target=/root/.cache/pip,sharing=locked \
+    pip install --no-cache-dir -r requirements.txt && \
     python -m spacy download en_core_web_sm
 
 # Install Playwright and dependencies
