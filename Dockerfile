@@ -26,8 +26,9 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     libatk1.0-0 libatk-bridge2.0-0 libcups2 libatspi2.0-0 libxcomposite1 nodejs \
     libportaudio2 libasound-dev libreoffice unoconv poppler-utils chromium chromium-sandbox \
     unixodbc unixodbc-dev cmake openscad xvfb xauth \
-    pandoc texlive-latex-extra lmodern \
-    bubblewrap && \
+    libdbus-1-3 libxkbcommon0 libxdamage1 \
+    libxfixes3 libxrandr2 libgbm1 libasound2 \
+    pandoc texlive-latex-extra lmodern bubblewrap && \
     apt-get install -y gcc-10 g++-10 && \
     update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 10 && \
     update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 10 && \
@@ -55,6 +56,4 @@ RUN --mount=type=cache,target=/root/.cache/pip,sharing=locked \
     python -m spacy download en_core_web_sm
 
 # Install Playwright and dependencies
-RUN playwright install-deps chromium && \
-    playwright install chromium && \
-    rm -rf /root/.cache/pip /root/.cache/ms-playwright /var/cache/apt/archives /var/tmp/* /tmp/*
+RUN playwright install chromium
