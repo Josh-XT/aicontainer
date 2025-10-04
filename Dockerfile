@@ -36,19 +36,6 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     apt-get build-dep sqlite3 -y && \
     rm -rf /var/lib/apt/lists/*
 
-
-# Install SQLite3
-RUN wget https://www.sqlite.org/2023/sqlite-autoconf-3420000.tar.gz && \
-    tar xzf sqlite-autoconf-3420000.tar.gz && \
-    if [ ! -d "/usr/lib/aarch64-linux-gnu/" ]; then mkdir -p /usr/lib/aarch64-linux-gnu/; fi && \
-    cd sqlite-autoconf-3420000 && \
-    ./configure && \
-    make && make install && \
-    cp /usr/local/lib/libsqlite3.* /usr/lib/aarch64-linux-gnu/ && \
-    ldconfig && \
-    cd .. && \
-    rm -rf sqlite*
-
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 ENV PATH="/root/.local/bin:$PATH"
 
