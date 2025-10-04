@@ -27,6 +27,5 @@ python-pptx==0.6.23
 pdf2image==1.17.0
 scipy
 spacy
-thinc
 spacy-legacy
 spacy-loggers
