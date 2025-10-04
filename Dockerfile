@@ -29,12 +29,6 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     libdbus-1-3 libxkbcommon0 libxdamage1 \
     libxfixes3 libxrandr2 libgbm1 libasound2 \
     pandoc texlive-latex-extra lmodern bubblewrap apt-transport-https && \
-    apt-get install -y gcc-10 g++-10 && \
-    update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 10 && \
-    update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 10 && \
-    awk '/^deb / && !seen[$0]++ {gsub(/^deb /, "deb-src "); print}' /etc/apt/sources.list | tee -a /etc/apt/sources.list && \
-    apt-get update && \
-    apt-get build-dep sqlite3 -y && \
     curl -LsSf https://astral.sh/uv/install.sh | sh && \
     rm -rf /var/lib/apt/lists/*
 ENV PATH="/root/.local/bin:$PATH"
