@@ -24,11 +24,11 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     git build-essential gcc g++ sqlite3 libsqlite3-dev wget libgomp1 ffmpeg \
     python3 python3-pip python3-dev curl postgresql-client libnss3 libnspr4 \
     libatk1.0-0 libatk-bridge2.0-0 libcups2 libatspi2.0-0 libxcomposite1 nodejs \
-    libportaudio2 libasound-dev libreoffice unoconv poppler-utils chromium chromium-sandbox \
+    libportaudio2 libasound-dev poppler-utils chromium chromium-sandbox \
     unixodbc unixodbc-dev cmake openscad xvfb xauth \
     libdbus-1-3 libxkbcommon0 libxdamage1 \
     libxfixes3 libxrandr2 libgbm1 libasound2 \
-    pandoc texlive-latex-extra lmodern bubblewrap apt-transport-https && \
+    pandoc apt-transport-https && \
     curl -LsSf https://astral.sh/uv/install.sh | sh && \
     rm -rf /var/lib/apt/lists/*
 ENV PATH="/root/.local/bin:$PATH"
