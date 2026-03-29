@@ -41,3 +41,5 @@ redis
 twilio
 botbuilder-core==4.17.1
 slack-sdk==3.41.0
+pyzbar
+pytesseract
