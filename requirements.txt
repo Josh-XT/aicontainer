@@ -45,3 +45,5 @@ pyzbar
 pytesseract
 onnxruntime
 tokenizers
+gpsoauth>=1.1.1
+curl_cffi
